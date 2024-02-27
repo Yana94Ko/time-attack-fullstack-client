@@ -9,7 +9,7 @@ function HeaderMenus() {
       {!isLoggedIn ? (
         <>
           <Link
-            href="/sign-up"
+            href="/auth/sign-up"
             className="text-[15px] font-medium text-gray-800 hover:text-black transition text-lg"
           >
             회원가입

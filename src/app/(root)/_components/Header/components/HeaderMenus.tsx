@@ -1,9 +1,16 @@
 "use client";
 
+import API from "@/api/index.api";
+import { useAuth } from "@/contexts/auth.context";
 import Link from "next/link";
+import { useEffect } from "react";
 
 function HeaderMenus() {
-  const isLoggedIn = false;
+  const { isLoggedIn, setIsLoggedIn } = useAuth();
+  useEffect(() => {
+    API.authAPI.refreshToken().then((isLoggedIn) => setIsLoggedIn(isLoggedIn));
+  }, []);
+
   return (
     <div className="ml-auto flex item-center gap-x-4 text-lg">
       {!isLoggedIn ? (

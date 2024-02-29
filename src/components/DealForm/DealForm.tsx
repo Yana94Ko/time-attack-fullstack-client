@@ -3,7 +3,13 @@ import API from "@/api/index.api";
 import Input from "@/components/Input";
 import { Deal } from "@/types/Deal.type";
 import { useRouter } from "next/navigation";
-import { FormEventHandler, useEffect, useId, useState } from "react";
+import {
+  ChangeEventHandler,
+  FormEventHandler,
+  useEffect,
+  useId,
+  useState,
+} from "react";
 
 function DealForm({ deal }: { deal?: Deal }) {
   const [title, setTitle] = useState<string>(deal ? deal.title : "");
@@ -19,7 +25,7 @@ function DealForm({ deal }: { deal?: Deal }) {
     if (title && content && price && location && file) setIsPending(false);
   }, [title, content, price, location, file]);
 
-  const onChangeImg = (e) => {
+  const onChangeImg: ChangeEventHandler<HTMLInputElement> = (e) => {
     e.preventDefault();
     const formData = new FormData();
 

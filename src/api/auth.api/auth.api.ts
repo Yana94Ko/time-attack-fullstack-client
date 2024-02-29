@@ -11,14 +11,12 @@ export async function logIn(dto: emailPasswordDto) {
 }
 export async function logOut() {
   const url = "/accounts/users/log-out";
-  await coreClient.delete(url);
+  await coreClient.post(url);
 }
 export async function refreshToken() {
   const url = "/accounts/users/refresh-token";
   const response = await coreClient.post(url);
-  console.log("response", response);
   const isLoggedIn = response.data.result;
-  console.log(isLoggedIn);
   return isLoggedIn;
 }
 

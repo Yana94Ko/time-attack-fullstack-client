@@ -1,12 +1,31 @@
 "use client";
 
 import API from "@/api/index.api";
+import LoginModal from "@/components/LoginModal";
 import { useAuth } from "@/contexts/auth.context";
+import { useUtil } from "@/contexts/util.context";
+import utils from "@/utils/utils";
 import Link from "next/link";
 import { useEffect } from "react";
 
 function HeaderMenus() {
-  const { isLoggedIn, setIsLoggedIn } = useAuth();
+  const { setModal } = useUtil();
+  const {
+    isLoggedIn,
+    setIsLoggedIn,
+    nickname,
+    setNickname,
+    setLoggedInUserId,
+  } = useAuth();
+
+  const handleClickLogin = () => {
+    setModal(<LoginModal />);
+  };
+  const handleClickLogOut = () => {
+    API.authAPI.logOut();
+    setIsLoggedIn(false);
+  };
+
   useEffect(() => {
     API.authAPI.refreshToken().then((isLoggedIn) => setIsLoggedIn(isLoggedIn));
   }, []);
@@ -22,7 +41,7 @@ function HeaderMenus() {
             회원가입
           </Link>
           <button
-            type="button"
+            onClick={handleClickLogin}
             className="text-[15px] font-medium text-gray-800 hover:text-black transition text-lg"
           >
             로그인
@@ -31,10 +50,10 @@ function HeaderMenus() {
       ) : (
         <>
           <button
-            type="button"
+            onClick={handleClickLogOut}
             className="text-[15px] font-medium text-gray-800 hover:text-black transition text-lg"
           >
-            로그아웃
+            {utils.nickname.getRandomNickname()}님 로그아웃
           </button>
         </>
       )}

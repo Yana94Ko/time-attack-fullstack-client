@@ -11,8 +11,8 @@ function InputEmail({
   label: string;
   inputType: string;
   minLength?: number;
-  value: string;
-  setValue: Dispatch<SetStateAction<string>>;
+  value: any;
+  setValue: Dispatch<SetStateAction<any>>;
 }) {
   const id = useId();
   return (
@@ -27,6 +27,7 @@ function InputEmail({
         id={id}
         type={inputType}
         value={value}
+        name={value}
         onChange={(e) => {
           setValue(e.target.value);
         }}

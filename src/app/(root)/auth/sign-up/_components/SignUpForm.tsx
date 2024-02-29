@@ -3,6 +3,7 @@ import API from "@/api/index.api";
 import Input from "@/components/Input";
 import { useAuth } from "@/contexts/auth.context";
 import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import { FormEventHandler, useState } from "react";
 
 function SignUpForm() {
@@ -10,6 +11,7 @@ function SignUpForm() {
   const [password, setPassword] = useState<string>("");
   const [passwordCheck, setPasswordCheck] = useState<string>("");
   const auth = useAuth();
+  const router = useRouter();
   const { mutate, isPending } = useMutation({
     mutationFn: API.authAPI.signUp,
   });
@@ -30,6 +32,7 @@ function SignUpForm() {
       {
         onSuccess: () => {
           auth.setIsLoggedIn(true);
+          router.push("/");
         },
       }
     );

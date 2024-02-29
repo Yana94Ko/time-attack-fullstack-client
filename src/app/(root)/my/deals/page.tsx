@@ -1,5 +1,7 @@
+import Page from "@/components/Page";
+
 function MyDealsPage() {
-  return <div>MyDealsPage</div>;
+  return <Page title="내 판매글" fullWidth={false}></Page>;
 }
 
 export default MyDealsPage;

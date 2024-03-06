@@ -8,3 +8,5 @@ export default function Home({}) {
     </Page>
   );
 }
+
+export const revalidate = 5;
